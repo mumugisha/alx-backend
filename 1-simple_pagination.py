@@ -53,7 +53,8 @@ class Server:
             page_size (int): The number of items per page.
 
         Returns:
-            List[List]: A list of lists, where each list represents a row in the dataset.
+            List[List]: A list of lists, where each list
+                        represents a row in the dataset.
         """
         assert type(page) is int and page > 0
         assert type(page_size) is int and page_size > 0
