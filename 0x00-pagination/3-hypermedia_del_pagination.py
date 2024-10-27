@@ -1,33 +1,17 @@
 #!/usr/bin/env python3
 """
-Pagination that handles deletions from the dataset dynamically, allowing
-seamless transitions between pages even when rows are removed.
+Deletion-resilient hypermedia pagination.
 """
 
 import csv
-from typing import List, Dict, Optional, Tuple
-
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    Calculate start and end indexes based on page number and page size.
-
-    Parameters:
-        page (int): Page number (1-indexed).
-        page_size (int): Number of items per page.
-
-    Returns:
-        Tuple[int, int]: Start and end indexes for pagination.
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return start_index, end_index
+from typing import List, Dict, Any
 
 
 class Server:
-    """Server class to paginate a dataset of
-    popular baby names, accounting for deletions."""
-
+    """Server class to paginate a database
+    of popular baby names,
+    handling deletions gracefully.
+    """
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
@@ -35,68 +19,67 @@ class Server:
         self.__indexed_dataset = None
 
     def dataset(self) -> List[List[str]]:
-        """Load and cache dataset."""
+        """Load and cache the dataset from a CSV file."""
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
-            self.__dataset = dataset[1:]  # Exclude header
+            self.__dataset = dataset[1:]
         return self.__dataset
 
     def indexed_dataset(self) -> Dict[int, List[str]]:
-        """
-        Create an indexed version of the dataset where keys are row indices.
-
-        Returns:
-            Dict[int, List[str]]: A dictionary with original index as the key
-            and data row as the value.
-        """
+        """Create an indexed version of the
+        dataset for easier pagination."""
         if self.__indexed_dataset is None:
             dataset = self.dataset()
             self.__indexed_dataset = {
-                i: dataset[i] for i in range(len(dataset))
+                i: dataset[i]
+                for i in range(len(dataset))
             }
         return self.__indexed_dataset
 
     def get_hyper_index(
         self, index: int = 0, page_size: int = 10
-    ) -> Dict[str, Optional[int]]:
+    ) -> Dict[str, Any]:
         """
-        Returns a dictionary of paginated data, accounting for deletions
-        in dataset.
+        Returns a dictionary with pagination
+        information, accounting
+        for any deletions.
 
         Parameters:
-            index (int): Starting index for the page.
-            page_size (int): Number of items per page.
+            index (int): The starting index for pagination.
+            page_size (int): The number of items to include in the page.
 
         Returns:
-            Dict[str, Optional[int]]: Paginated data with metadata.
+            Dict[str, Any]: A dictionary with keys:
+                - "index": The starting index of the current page.
+                - "next_index": The starting index of the next page
+                  or None if at the end.
+                - "page_size": The number of items on the current page.
+                - "data": The actual data for the current page.
         """
-        indexed_data = self.indexed_dataset()
-        total_items = len(indexed_data)
+        dataset = self.indexed_dataset()
+        total_items = len(dataset)
 
-        # Raise an AssertionError if the index is out of range
-        assert 0 <= index < total_items, "Index out of range."
+        assert 0 <= index < total_items
 
         data = []
-        collected_data = 0
-        keys = sorted(indexed_data.keys())
-        next_index = index
+        received = {"index": index}
+        current_index = index
 
-        # Collect items while skipping deleted entries
-        while collected_data < page_size and next_index < len(keys):
-            item = indexed_data[keys[next_index]]
-            if item:
-                data.append(item)
-                collected_data += 1
-            next_index += 1
+        while len(data) < page_size and current_index < total_items:
+            new_item = dataset.get(current_index)
+            if new_item:
+                data.append(new_item)
+            current_index += 1
 
-        return {
-            "index": index,
-            "next_index": keys[next_index] if next_index < len(keys) else None,
-            "page_size": page_size,
-            "data": data
-        }
+        received["data"] = data
+        received["page_size"] = len(data)
+        received["next_index"] = (
+            current_index if current_index < total_items else None
+        )
+
+        return received
 
 
 if __name__ == "__main__":
