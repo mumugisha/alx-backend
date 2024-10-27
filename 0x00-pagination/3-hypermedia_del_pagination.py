@@ -75,15 +75,21 @@ class Server:
         indexed_data = self.indexed_dataset()
         total_items = len(indexed_data)
 
-        # Ensure index is within range
-        assert 0 <= index < total_items, "Invalid index"
+        # Adjust the index if it's out of range
+        if index >= total_items or index < 0:
+            return {
+                "index": index,
+                "next_index": None,
+                "page_size": page_size,
+                "data": []
+            }
 
         data = []
-        next_index = index
         collected_data = 0
+        keys = sorted(indexed_data.keys())
+        next_index = index
 
         # Collect items while skipping deleted entries
-        keys = sorted(indexed_data.keys())
         while collected_data < page_size and next_index < len(keys):
             item = indexed_data[keys[next_index]]
             if item:
