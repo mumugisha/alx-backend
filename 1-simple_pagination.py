@@ -5,10 +5,7 @@ return the appropriate page of the dataset
 """
 
 import csv
-import math
-from typing import List
-
-from typing import Tuple
+from typing import List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
@@ -49,23 +46,22 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
+        Returns a page from the dataset.
+
+        Parameters:
+            page (int): The page number (1-indexed).
+            page_size (int): The number of items per page.
+
+        Returns:
+            List[List]: A list of lists, where each list represents a row in the dataset.
         """
-        args:
-            page (int)
-            page_size(int):
-
-        return:
-            list of lists in a dataset
-
         assert type(page) is int and page > 0
         assert type(page_size) is int and page_size > 0
 
         dataset = self.dataset()
-        data_length = len(dataset)
-        try:
-            index = index_range(page, page_size)
-            return dataset[index[0]:index[1]]
-        except IndexError
+        start_index, end_index = index_range(page, page_size)
+
+        if start_index >= len(dataset):
             return []
 
-
+        return dataset[start_index:end_index]
