@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""
+Function named index_range that takes two integer arguments page and page_size
+"""
 from typing import Tuple
 
 
