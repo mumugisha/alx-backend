@@ -75,14 +75,8 @@ class Server:
         indexed_data = self.indexed_dataset()
         total_items = len(indexed_data)
 
-        # Adjust the index if it's out of range
-        if index >= total_items or index < 0:
-            return {
-                "index": index,
-                "next_index": None,
-                "page_size": page_size,
-                "data": []
-            }
+        # Raise an AssertionError if the index is out of range
+        assert 0 <= index < total_items, "Index out of range."
 
         data = []
         collected_data = 0
