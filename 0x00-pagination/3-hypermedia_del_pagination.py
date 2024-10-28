@@ -9,8 +9,7 @@ from typing import List, Dict, Any
 
 
 class Server:
-    """Server class to paginate a database
-    of popular baby names.
+    """Server class to paginate a database of popular baby names.
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -40,8 +39,11 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(
-        self, index: int = 0, page_size: int = 10
-    ) -> Dict[str, Any]:
+            self,
+            index: int = 0,
+            page_size: int = 10
+        )
+    -> Dict[str, Any]:
         """
         Returns a dictionary with pagination information,
         accounting for deletions.
@@ -53,14 +55,15 @@ class Server:
         Returns:
             Dict[str, Any]: A dictionary with keys:
                 - "index": The starting index of the current page.
-                - "next_index": The starting index of the next page or None
-                  if at the end.
+                - "next_index": The starting index of the next page
+                                or None if at the end.
                 - "page_size": The number of items on the current page.
                 - "data": The actual data for the current page.
         """
         dataset = self.indexed_dataset()
         total_items = len(dataset)
 
+        # Assert index is within valid range
         assert 0 <= index < total_items, "Index is out of range."
 
         data = []
@@ -68,9 +71,9 @@ class Server:
         current_index = index
 
         while len(data) < page_size and current_index < total_items:
-            new_item = dataset.get(current_index)
-            if new_item:
-                data.append(new_item)
+            item = dataset.get(current_index)
+            if item:
+                data.append(item)
             current_index += 1
 
         received["data"] = data
