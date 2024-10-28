@@ -60,7 +60,8 @@ class Server:
         dataset = self.indexed_dataset()
         total_items = len(dataset)
 
-        assert 0 <= index < total_items
+        # Assert that index is within the valid range of the dataset
+        assert 0 <= index < total_items, f"Index {index} is out of range."
 
         data = []
         received = {"index": index}
