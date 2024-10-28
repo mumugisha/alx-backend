@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Deletion-resilient hypermedia pagination
+The goal here is that if between two queries, certain
+rows are removed from the dataset,
+the user does not miss items from dataset when changing page
 """
 
 import csv
@@ -59,9 +61,9 @@ class Server:
 
         # Collect items until reaching page_size or end of dataset
         while len(data) < page_size and current_index < len(indexed_dataset):
-            item = indexed_dataset.get(current_index)
-            if item:
-                data.append(item)
+            item_lists = indexed_dataset.get(current_index)
+            if item_lists:
+                data.append(item_lists)
             current_index += 1
 
         next_index = current_index
