@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """
-The goal here is that if between two queries, certain
-rows are removed from the dataset,
-the user does not miss items from dataset when changing page
+A module for paginating a dataset with considerations
+for potential row deletions between pagination queries,
+ensuring the user does not miss any items.
 """
 import csv
 from typing import List, Dict, Any
 
 
 class Server:
-    """Server class to paginate a database of popular baby names.
-    """
+    """Server class to paginate a database of popular baby names."""
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
@@ -18,19 +17,16 @@ class Server:
         self.__indexed_dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset
-        """
+        """Cached dataset"""
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]  # Skip header
-
         return self.__dataset
 
     def indexed_dataset(self) -> Dict[int, List]:
-        """Dataset indexed by sorting position, starting at 0
-        """
+        """Dataset indexed by sorting position, starting at 0"""
         if self.__indexed_dataset is None:
             dataset = self.dataset()
             self.__indexed_dataset = {
@@ -39,11 +35,10 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(
-            self,
-            index: int = 0,
-            page_size: int = 10
-        )
-    -> Dict[str, Any]:
+        self,
+        index: int = 0,
+        page_size: int = 10
+    ) -> Dict[str, Any]:
         """
         Returns a dictionary with pagination information,
         accounting for deletions.
@@ -53,23 +48,20 @@ class Server:
             page_size (int): The number of items to include in the page.
 
         Returns:
-            Dict[str, Any]: A dictionary with keys:
-                - "index": The starting index of the current page.
-                - "next_index": The starting index of the next page
-                                or None if at the end.
-                - "page_size": The number of items on the current page.
-                - "data": The actual data for the current page.
+            Dict[str, Any]: Pagination information including
+            current and next index.
         """
         dataset = self.indexed_dataset()
         total_items = len(dataset)
 
-        # Assert index is within valid range
-        assert 0 <= index < total_items, "Index is out of range."
+        # Ensure the index is within the valid range
+        assert 0 <= index < total_items, "Index is out of range"
 
         data = []
         received = {"index": index}
         current_index = index
 
+        # Collect items until reaching page_size or end of dataset
         while len(data) < page_size and current_index < total_items:
             item = dataset.get(current_index)
             if item:
