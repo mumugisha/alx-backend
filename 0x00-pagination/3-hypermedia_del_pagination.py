@@ -37,7 +37,8 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
-        Returns a dictionary with pagination information, resilient to deletions.
+        Returns a dictionary with pagination information,
+        resilient to deletions.
 
         Parameters:
             index (int): Starting index for pagination.
