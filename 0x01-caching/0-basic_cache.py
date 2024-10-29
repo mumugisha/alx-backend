@@ -3,10 +3,12 @@
 
 from Base_Caching import BaseCaching
 
+
 class BasicCache(BaseCaching):
     """
-    BasicCache class that inherits from BaseCaching and provides a simple caching system.
-    This caching system has no limit on the number of items it can store.
+    BasicCache class that inherits from BaseCaching and
+    provides a simple caching system.Tthis caching system has no
+    limit on the number of items it can store.
     """
 
     def put(self, key, item):
