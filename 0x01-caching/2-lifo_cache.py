@@ -22,8 +22,10 @@ class LIFOCache(BaseCaching):
         if key is None or item is None:
             return
 
+        # Add the item to the cache
         self.cache_data[key] = item
 
+        # If the number of items exceeds MAX_ITEMS, discard the last item added
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             # Get the last key inserted (LIFO)
             last_key = list(self.cache_data.keys())[-1]
