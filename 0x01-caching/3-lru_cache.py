@@ -28,7 +28,7 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """ Get an item by key """
-        if key is not None or key in self.cache_data.keys():
+        if key is not None and key in self.cache_data.keys():
             del self.usage[self.usage.index(key)]
             self.usage.append(key)
             return self.cache_data[key]
