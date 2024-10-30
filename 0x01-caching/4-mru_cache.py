@@ -4,7 +4,7 @@
 from base_caching import BaseCaching
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """ FIFOCache defines the caching system
     """
 
