@@ -12,7 +12,7 @@ class LRUCache(BaseCaching):
         """ Initialize
         """
         super().__init__()
-        self.order = []
+        self.usage = []
 
     def put(self, key, item):
         """ Add an item to the cache
@@ -36,5 +36,5 @@ class LRUCache(BaseCaching):
         if key is None or key in self.cache_data.keys():
             del self.usage[self.usage.index(key)]
             self.usage.append(key)
-            return None
-        return self.cache_data[key]
+            return self.cache_data[key]
+        return None
