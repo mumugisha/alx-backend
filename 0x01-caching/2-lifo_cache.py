@@ -12,40 +12,29 @@ class LIFOCache(BaseCaching):
         """ Initialize
         """
         super().__init__()
+        self.order = []
 
     def put(self, key, item):
         """ Add an item to the cache
-        Args:
-            key: The key to add.
-            item: The item to add.
         """
         if key is None or item is None:
-            return
+            pass
 
-        # Add the item to the cache
+        else:
+            length = len(self.cache_data)
+            if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+            print("DISCARD: {}".format(self.order[-1]))
+            del self.cache_data[self.order[-1]]
+            del self.order[-1]
+        if key in self.order:
+            del self.order[self.order.index(key)]
+        self.order.append(key)
         self.cache_data[key] = item
 
-        # If the number of items exceeds MAX_ITEMS, discard the last item added
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            # Get the last key inserted (LIFO)
-            last_key = list(self.cache_data.keys())[-1]
-            print("DISCARD: {}".format(last_key))
-            del self.cache_data[last_key]
 
     def get(self, key):
-        """ Get an item by key
-        Args:
-            key: The key to look up.
-        Returns:
-            The value associated with the key, or None if not found.
+        """ Get an item by key.
         """
         if key is None or key not in self.cache_data:
-            return None
-        return self.cache_data[key]
-
-    def print_cache(self):
-        """ Print the current cache data
-        """
-        print("Current cache:")
-        for key in self.cache_data:
-            print("{}: {}".format(key, self.cache_data[key]))
+            return self.cache_data[key]
+        return None
