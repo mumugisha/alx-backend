@@ -2,9 +2,13 @@
 """ Setup a basic Flask app """
 
 import locale
-from flask import Flask, render_template, request, g
+from flask import (
+    Flask,
+    render_template,
+    request,
+    g
+)
 from flask_babel import Babel
-
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -18,7 +22,6 @@ class Config(object):
     """
     Babel configuration
     """
-
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -31,18 +34,18 @@ babel = Babel(app)
 
 def get_user():
     """
-    Return user dict or None if the ID cannot be found.
+    return dict or None of ID Value can not be found
     """
-    user_id = request.args.get('login_as', None)
-    if user_id is not None and int(user_id) in users:
-        return users.get(int(user_id))
+    id = request.args.get('login_as', None)
+    if id is not None and int(id) in users.keys():
+        return users.get(int(id))
     return None
 
 
 @app.before_request
 def before_request():
     """
-    Set global user (g.user) before handling the request.
+    To add users to flask if user is found
     """
     user = get_user()
     g.user = user
@@ -51,25 +54,22 @@ def before_request():
 @babel.localeselector
 def get_locale():
     """
-    Determine the best match for locale.
+    Select and do return to determine the best match
+    with our supported languages.
     """
-    locale_param = request.args.get('locale')
-    if locale_param in app.config['LANGUAGES']:
-        return locale_param
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    local = request.args.get('locale')
+    if local in app.config['LANGUAGES']:
+        return local
+
+    return request.accept_languages.supported_match(app.config['LANGUAGES'])
 
 
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """
-    Render the homepage with a personalized message.
+    Handle the app routing
     """
-    if g.user:
-        message = f"Hello world! You are logged in as {g.user['name']}"
-    else:
-        message = "Hello world! You are not logged in."
-    
-    return render_template('5-index.html', message=message)
+    return render_template('5-index.html')
 
 
 if __name__ == "__main__":
