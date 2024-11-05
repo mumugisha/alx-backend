@@ -7,9 +7,11 @@
 <body>
     <p>
         {% if g.user %}
-            Welcome, {{ g.user['name'] }}! Your locale is {{ g.user['locale'] }}.
+            Welcome, {{ g.user['name'] }}! 
+            Your locale is {{ g.user['locale'] or 'default' }}.
         {% else %}
-            Welcome, guest! Please log in by providing a user ID with the 'login_as' parameter.
+            Welcome, guest! 
+            Please log in by providing a user ID with the 'login_as' parameter.
         {% endif %}
     </p>
 </body>

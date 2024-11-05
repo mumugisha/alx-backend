@@ -62,9 +62,14 @@ def get_locale():
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """
-    Render the homepage.
+    Render the homepage with a personalized message.
     """
-    return render_template('5-index.html')
+    if g.user:
+        message = f"Hello world! You are logged in as {g.user['name']}"
+    else:
+        message = "Hello world! You are not logged in."
+    
+    return render_template('5-index.html', message=message)
 
 
 if __name__ == "__main__":
