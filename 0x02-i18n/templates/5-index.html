@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ _('home_title') }}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Status</title>
 </head>
 <body>
-    <h1>{{ _('home_title') }}</h1>
-    {% if g.user %}
-    <p>{{ gettext('logged_in_as', username=g.user.name) }}</p>
-    {% else %}
-    <p>{{ gettext('not_logged_in') }}</p>
-    {% endif %}
+  <h1 id="message"></h1>
+
+  <script>
+    const isLoggedIn = false;
+
+    const messageElement = document.getElementById("message");
+
+    if (isLoggedIn) {
+      messageElement.textContent = "Hello World! You are logged in.";
+    } else {
+      messageElement.textContent = "Hello World! You are not logged in.";
+    }
+  </script>
 </body>
 </html>
