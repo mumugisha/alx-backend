@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
-
-msgid "home_title"
-msgstr "Bienvenue chez Holberton"
+msgid ""
+msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-05 23:14+0200\n"
-"PO-Revision-Date: 2024-11-05 23:14+0200\n"
+"POT-Creation-Date: 2024-11-05 23:27+0200\n"
+"PO-Revision-Date: 2024-11-05 23:48+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -20,5 +19,8 @@ msgstr "Bienvenue chez Holberton"
 "Generated-By: Babel 2.16.0\n"
 
 #: templates/3-index.html:6 templates/3-index.html:9
+msgid "home_title"
+msgstr "Bienvenue chez Holberton"
+
 msgid "home_header"
 msgstr "Bonjour monde!"
