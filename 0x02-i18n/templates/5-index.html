@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Status</title>
+    <meta charset="UTF-8">
+    <title>Flask App</title>
 </head>
 <body>
-  <h1 id="message"></h1>
-
-  <script>
-    const isLoggedIn = false;
-
-    const messageElement = document.getElementById("message");
-
-    if (isLoggedIn) {
-      messageElement.textContent = "Hello World! You are logged in.";
-    } else {
-      messageElement.textContent = "Hello World! You are not logged in.";
-    }
-  </script>
+    <p>
+        {% if g.user %}
+            Welcome, {{ g.user['name'] }}! Your locale is {{ g.user['locale'] }}.
+        {% else %}
+            Welcome, guest! Please log in by providing a user ID with the 'login_as' parameter.
+        {% endif %}
+    </p>
 </body>
 </html>
