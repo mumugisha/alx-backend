@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Setup a basic Flask app"""
 
-import locale
 from flask import (
     Flask,
     render_template,
@@ -9,7 +8,6 @@ from flask import (
     g
 )
 from flask_babel import Babel
-from typing import Dict, Union
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -73,7 +71,7 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/',  strict_slashes=True)
+@app.route('/')
 def index() -> str:
     """
     Handle the app routing.
