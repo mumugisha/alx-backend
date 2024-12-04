@@ -29,12 +29,12 @@ describe('Test createPushNotificationsJobs function', function () {
     const jobs = [
       {
         phoneNumber: '4153518780',
-        message: 'This is the code 1234 to verify your account',
+        message: 'This is the code 1234 to verify your account'
       },
       {
         phoneNumber: '4153518781',
-        message: 'This is the code 4562 to verify your account',
-      },
+        message: 'This is the code 4562 to verify your account'
+      }
     ];
 
     createPushNotificationsJobs(jobs, queue);

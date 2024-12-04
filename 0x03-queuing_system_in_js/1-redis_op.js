@@ -10,7 +10,7 @@ client.on('error', function (err) {
   console.log(`Redis client not connected to the server: ${err}`);
 });
 
-function setNewSchool(schoolName, value) {
+function setNewSchool (schoolName, value) {
   client.set(schoolName, value, function (err, reply) {
     if (err) {
       console.log(err);
@@ -20,7 +20,7 @@ function setNewSchool(schoolName, value) {
   });
 }
 
-function displaySchoolValue(schoolName) {
+function displaySchoolValue (schoolName) {
   client.get(schoolName, function (error, result) {
     if (error) {
       console.log(error);

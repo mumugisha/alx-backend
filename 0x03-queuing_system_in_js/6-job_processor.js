@@ -2,7 +2,7 @@ import { createQue } from 'kue';
 
 const queue = createQue();
 
-function sendNotification(phoneNumber, message) {
+function sendNotification (phoneNumber, message) {
   console.log(`Sending notification to ${phoneNumber}, with message: ${message}`);
 }
 
