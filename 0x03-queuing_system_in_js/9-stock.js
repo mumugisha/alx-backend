@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 import { createClient } from 'redis';
 import { promisify } from 'util';
 
