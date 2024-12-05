@@ -1,0 +1,95 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save-dev',
+1 verbose cli   '@babel/node' ]
+2 info using npm@3.5.2
+3 info using node@v8.10.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData @babel/node@^7.26.0
+8 silly fetchNamedPackageData @babel/node
+9 silly mapToRegistry name @babel/node
+10 silly mapToRegistry scope (from package name) @babel
+11 verbose mapToRegistry no registry URL found in name for scope @babel
+12 silly mapToRegistry using default registry
+13 silly mapToRegistry registry https://registry.npmjs.org/
+14 silly mapToRegistry uri https://registry.npmjs.org/@babel%2fnode
+15 verbose request uri https://registry.npmjs.org/@babel%2fnode
+16 verbose request no auth needed
+17 info attempt registry request try #1 at 12:00:02 AM
+18 verbose request id 37c7ecba985d52fd
+19 verbose etag W/"88bedeee66a83a549a7011c84bf0a9d5"
+20 verbose lastModified Fri, 25 Oct 2024 13:53:50 GMT
+21 http request GET https://registry.npmjs.org/@babel%2fnode
+22 http 304 https://registry.npmjs.org/@babel%2fnode
+23 verbose headers { date: 'Thu, 05 Dec 2024 00:00:02 GMT',
+23 verbose headers   connection: 'keep-alive',
+23 verbose headers   'cf-ray': '8ecfc0ef6a45d6b5-IAD',
+23 verbose headers   'cf-cache-status': 'HIT',
+23 verbose headers   'access-control-allow-origin': '*',
+23 verbose headers   age: '43',
+23 verbose headers   'cache-control': 'public, max-age=300',
+23 verbose headers   etag: '"88bedeee66a83a549a7011c84bf0a9d5"',
+23 verbose headers   'last-modified': 'Fri, 25 Oct 2024 13:53:50 GMT',
+23 verbose headers   vary: 'Accept-Encoding',
+23 verbose headers   server: 'cloudflare' }
+24 silly get cb [ 304,
+24 silly get   { date: 'Thu, 05 Dec 2024 00:00:02 GMT',
+24 silly get     connection: 'keep-alive',
+24 silly get     'cf-ray': '8ecfc0ef6a45d6b5-IAD',
+24 silly get     'cf-cache-status': 'HIT',
+24 silly get     'access-control-allow-origin': '*',
+24 silly get     age: '43',
+24 silly get     'cache-control': 'public, max-age=300',
+24 silly get     etag: '"88bedeee66a83a549a7011c84bf0a9d5"',
+24 silly get     'last-modified': 'Fri, 25 Oct 2024 13:53:50 GMT',
+24 silly get     vary: 'Accept-Encoding',
+24 silly get     server: 'cloudflare' } ]
+25 verbose etag https://registry.npmjs.org/@babel%2fnode from cache
+26 verbose get saving @babel/node to /root/.npm/registry.npmjs.org/_40babel_252fnode/.cache.json
+27 silly install normalizeTree
+28 silly loadCurrentTree Finishing
+29 silly loadIdealTree Starting
+30 silly install loadIdealTree
+31 silly cloneCurrentTree Starting
+32 silly install cloneCurrentTreeToIdealTree
+33 silly cloneCurrentTree Finishing
+34 silly loadShrinkwrap Starting
+35 silly install loadShrinkwrap
+36 silly loadShrinkwrap Finishing
+37 silly loadAllDepsIntoIdealTree Starting
+38 silly install loadAllDepsIntoIdealTree
+39 verbose stack Error: Missing required argument #1
+39 verbose stack     at andLogAndFinish (/usr/share/npm/lib/fetch-package-metadata.js:31:3)
+39 verbose stack     at fetchPackageMetadata (/usr/share/npm/lib/fetch-package-metadata.js:51:22)
+39 verbose stack     at resolveWithNewModule (/usr/share/npm/lib/install/deps.js:456:12)
+39 verbose stack     at /usr/share/npm/lib/install/deps.js:190:5
+39 verbose stack     at /usr/share/npm/node_modules/slide/lib/async-map.js:52:35
+39 verbose stack     at Array.forEach (<anonymous>)
+39 verbose stack     at /usr/share/npm/node_modules/slide/lib/async-map.js:52:11
+39 verbose stack     at Array.forEach (<anonymous>)
+39 verbose stack     at asyncMap (/usr/share/npm/node_modules/slide/lib/async-map.js:51:8)
+39 verbose stack     at exports.loadRequestedDeps (/usr/share/npm/lib/install/deps.js:188:3)
+40 verbose cwd /alx-backend/0x03-queuing_system_in_js
+41 error Linux 5.3.0-1032-aws
+42 error argv "/usr/bin/node" "/usr/bin/npm" "install" "--save-dev" "@babel/node"
+43 error node v8.10.0
+44 error npm  v3.5.2
+45 error code EMISSINGARG
+46 error typeerror Error: Missing required argument #1
+46 error typeerror     at andLogAndFinish (/usr/share/npm/lib/fetch-package-metadata.js:31:3)
+46 error typeerror     at fetchPackageMetadata (/usr/share/npm/lib/fetch-package-metadata.js:51:22)
+46 error typeerror     at resolveWithNewModule (/usr/share/npm/lib/install/deps.js:456:12)
+46 error typeerror     at /usr/share/npm/lib/install/deps.js:190:5
+46 error typeerror     at /usr/share/npm/node_modules/slide/lib/async-map.js:52:35
+46 error typeerror     at Array.forEach (<anonymous>)
+46 error typeerror     at /usr/share/npm/node_modules/slide/lib/async-map.js:52:11
+46 error typeerror     at Array.forEach (<anonymous>)
+46 error typeerror     at asyncMap (/usr/share/npm/node_modules/slide/lib/async-map.js:51:8)
+46 error typeerror     at exports.loadRequestedDeps (/usr/share/npm/lib/install/deps.js:188:3)
+47 error typeerror This is an error with npm itself. Please report this error at:
+47 error typeerror     <http://github.com/npm/npm/issues>
+48 verbose exit [ 1, true ]
